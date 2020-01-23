@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-control custom-checkbox"
+  <div class="custom-control custom-checkbox" @click.stop="handleClick"
        :class="{'disabled': disabled, 'form-check-inline': inline}">
     <input :id="cbId"
            class="custom-control-input"
@@ -56,6 +56,12 @@ export default {
   },
   mounted() {
     this.cbId = randomString()
+  },
+  methods: {
+    handleClick(evt) {
+      evt.stopPropagation();
+      this.$emit("click", evt);
+    }
   }
 };
 </script>
