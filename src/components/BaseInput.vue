@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group"
+    <div
          :class="[
        {'input-group': hasIcon},
        {'has-danger': error},
