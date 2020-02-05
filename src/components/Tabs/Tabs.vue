@@ -32,6 +32,8 @@
           </li>
 
         </ul>
+        <slot name="tabs">
+        </slot>
       </div>
     </template>
     <div slot="content" class="tab-content"
@@ -147,6 +149,7 @@ export default {
   methods: {
     findAndActivateTab(title) {
       let tabToActivate = this.tabs.find(t => t.title === title);
+      console.log("activate", tabToActivate);
       if (tabToActivate) {
         this.activateTab(tabToActivate);
       }
@@ -158,6 +161,8 @@ export default {
       this.deactivateTabs();
       tab.active = true;
       this.activeTabIndex = this.tabs.findIndex(t => t.active);
+      tab.activeTabIndex = this.activeTabIndex;
+      this.$emit('activate', tab);
     },
     deactivateTabs() {
       this.tabs.forEach(tab => {
@@ -181,6 +186,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       if (this.value) {
+        console.log("mounted");
         this.findAndActivateTab(this.value);
       } else {
         if (this.tabs.length > 0) {
@@ -191,6 +197,7 @@ export default {
   },
   watch: {
     value(newVal) {
+      console.log("watch value");
       this.findAndActivateTab(newVal);
     }
   }
