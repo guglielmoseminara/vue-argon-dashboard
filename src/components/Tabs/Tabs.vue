@@ -149,7 +149,10 @@ export default {
   methods: {
     findAndActivateTab(title) {
       let tabToActivate = this.tabs.find(t => t.title === title);
-      console.log("activate", tabToActivate);
+      for (let i = 0; i < this.tabs.length; i++) {
+        console.log(this.tabs[i].title);
+      }
+      console.log("activate", title, this.tabs, tabToActivate);
       if (tabToActivate) {
         this.activateTab(tabToActivate);
       }
@@ -181,24 +184,28 @@ export default {
       if (index > -1) {
         tabs.splice(index, 1);
       }
+    },
+    initTab() {
+      this.$nextTick(() => {
+        if (this.value) {
+          this.findAndActivateTab(this.value);
+        } else {
+          if (this.tabs.length > 0) {
+            this.activateTab(this.tabs[0]);
+          }
+        }
+      });
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      if (this.value) {
-        console.log("mounted");
-        this.findAndActivateTab(this.value);
-      } else {
-        if (this.tabs.length > 0) {
-          this.activateTab(this.tabs[0]);
-        }
-      }
-    });
+    this.initTab();
   },
   watch: {
     value(newVal) {
-      console.log("watch value");
       this.findAndActivateTab(newVal);
+    },
+    tabs() {
+      this.initTab();
     }
   }
 };

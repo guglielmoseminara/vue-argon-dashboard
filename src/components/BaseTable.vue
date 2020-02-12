@@ -8,6 +8,7 @@
       </tr>
     </thead>
     <tbody :class="tbodyClasses">
+      <div class="loading"><slot name="loading"></slot></div>
       <tr v-for="(item, index) in data" :key="index" @click="rowClick(item)">
         <slot :row="item" :index="index">
           <td
@@ -73,4 +74,11 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+  table .loading {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+</style>
