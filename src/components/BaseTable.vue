@@ -75,10 +75,5 @@ export default {
 };
 </script>
 <style>
-  table .loading {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-  }
+  
 </style>

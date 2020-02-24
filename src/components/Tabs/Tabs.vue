@@ -25,8 +25,10 @@
                @click.prevent="activateTab(tab)"
                :aria-selected="tab.active"
                :class="{active: tab.active}">
-              <tab-item-content :tab="tab">
-              </tab-item-content>
+               <slot name="tab-content" :tab="tab">
+                <tab-item-content :tab="tab">
+                </tab-item-content>
+                </slot>
             </a>
 
           </li>
@@ -149,10 +151,6 @@ export default {
   methods: {
     findAndActivateTab(title) {
       let tabToActivate = this.tabs.find(t => t.title === title);
-      for (let i = 0; i < this.tabs.length; i++) {
-        console.log(this.tabs[i].title);
-      }
-      console.log("activate", title, this.tabs, tabToActivate);
       if (tabToActivate) {
         this.activateTab(tabToActivate);
       }
