@@ -37,6 +37,9 @@
         },
         description:
           'Sidebar link. Can contain name, path, icon and other attributes. See examples for more info'
+      },
+      opened: {
+        type: Boolean
       }
     },
     inject: {
@@ -45,12 +48,14 @@
       }
     },
     mounted() {
-      console.log(this.$slots);
+      if (this.link.path == this.$route.path) {
+        this.$parent.collapsed = true;
+      }
     },
     data() {
       return {
         children: [],
-        collapsed: false
+        collapsed: this.opened || false
       };
     },
     methods: {
@@ -65,7 +70,11 @@
       },
       toggleCollapse() {
         this.collapsed = !this.collapsed;
-        console.log(this.collapsed);
+      }
+    },
+    watch: {
+      opened(value) {
+        this.collapsed = value;
       }
     }
   };
