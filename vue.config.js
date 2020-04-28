@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
 const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
@@ -8,7 +9,9 @@ module.exports = {
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 6
       })
-    ]
+    ],
+    target: 'node',
+    externals: [nodeExternals()]
   },
   pwa: {
     name: 'Vue Argon Dashboard',
