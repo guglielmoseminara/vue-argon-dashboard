@@ -1,7 +1,7 @@
 {
   "name": "vue-argon-dashboard",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "./dist/vue-argon-dashboard.umd.js",
   "browser": "./src/plugins/argon-dashboard.js",
   "scripts": {
